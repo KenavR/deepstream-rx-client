@@ -1,0 +1,2 @@
+# Deepstream.io RxJS Client
+A work in progress [RxJS](https://github.com/ReactiveX/RxJS) wrapper for the [Deepstream.io client](https://github.com/deepstreamIO/deepstream.io-client-js). This implementation tries to stay true to the original client implementation but augments the api with additional functions. This project is in its infancy and far from usable.
