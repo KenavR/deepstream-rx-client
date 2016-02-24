@@ -1,10 +1,10 @@
-import {Observable} from "rxjs/Observable";
-import * as deepstream from "deepstream.io-client-js";
+import {Observable} from "../../node_modules/rxjs/Rx";
+import * as deepstream from "../../node_modules/deepstream.io-client-js/dist/deepstream";
 
-import Record from "./Record";
-import List from "./List";
+import {Record} from "../record/Record";
+import {List} from "../record/List";
 
-export default class DeepStreamRx {
+export class DeepstreamRxClient {
     private _deepstream;
     public record:Record;
     public list:List;

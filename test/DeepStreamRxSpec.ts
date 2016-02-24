@@ -1,8 +1,8 @@
 /// <reference path="../typings/mocha/mocha.d.ts" />
 /// <reference path="../typings/chai/chai.d.ts" />
 
-import Record from "../src/Record";
-import List from "../src/List";
+import Record from "../src/record/Record";
+import List from "../src/record/List";
 import DeepStreamRx from "../src/DeepStreamRx";
 import {expect} from "chai";
 

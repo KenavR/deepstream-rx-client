@@ -1,7 +1,8 @@
-import {Observable} from "rxjs/Rx";
-import Record from "./Record";
+import {Observable} from "../../node_modules/rxjs/Rx";
+import {Record} from "./Record";
 
-export default class List {
+
+export class List {
     private _deepstream;
     private _record:Record;
 

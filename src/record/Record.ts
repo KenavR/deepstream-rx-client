@@ -1,6 +1,6 @@
-import {Observable} from "rxjs/Rx";
+import {Observable} from "../../node_modules/rxjs/Rx";
 
-export default class Record {
+export class Record {
     private _deepstream;
 
     constructor(deepstream) {
