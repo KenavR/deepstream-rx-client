@@ -4,14 +4,17 @@
   "description": "RxJS wrapper for deepstream.io client",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "tsc src/*.ts --outFile dist/app.js"
   },
   "author": "",
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "mocha": "^2.4.5",
     "tsd": "^0.6.5",
-    "mocha": "^2.4.5"
+    "typescript": "^1.8.2",
+    "typings": "^0.6.8"
   },
   "dependencies": {
     "deepstream.io-client-js": "^0.4.0",

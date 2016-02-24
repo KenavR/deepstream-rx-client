@@ -1,15 +1,20 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "system",
     "moduleResolution": "node",
-    "sourceMap": true,
+    "sourceMap": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "outDir": "dist"
   },
+  "include": [
+    "./src/*.ts"
+  ],
   "exclude": [
+    "test",
     "node_modules",
     "typings/main",
     "typings/main.d.ts"
