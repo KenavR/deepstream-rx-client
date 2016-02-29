@@ -1,4 +1,4 @@
-import {Observable} from "../../node_modules/rxjs/Rx";
+import {Observable} from "rxjs/Observable";
 
 export class Record {
     private _deepstream;

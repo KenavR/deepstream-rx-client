@@ -12,6 +12,8 @@
   "private": true,
   "devDependencies": {
     "mocha": "^2.4.5",
+    "path": "^0.12.7",
+    "systemjs-builder": "^0.15.9",
     "tsd": "^0.6.5",
     "typescript": "^1.8.2",
     "typings": "^0.6.8"

@@ -1,4 +1,5 @@
-import {Observable} from "../../node_modules/rxjs/Rx";
+import {Observable} from "rxjs/Observable";
+import * as deepstream from "deepstream.io-client-js/dist/deepstream";
 import {Record} from "./Record";
 
 

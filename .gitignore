@@ -6,3 +6,5 @@ test/**/*.js.map
 .idea
 npm-debug.log
 typings
+DeepstreamRx
+dist
