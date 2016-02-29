@@ -1,0 +1,48 @@
+<html>
+<head>
+  <title>Angular 2 QuickStart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- 1. Load libraries -->
+  <!-- IE required polyfills, in this exact order -->
+  <script src="node_modules/es6-shim/es6-shim.min.js"></script>
+  <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+  <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+
+  <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+  <script src="node_modules/systemjs/dist/system.src.js"></script>
+  <script src="node_modules/rxjs/bundles/Rx.js"></script>
+  <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+
+  <!-- 2. Configure SystemJS -->
+  <script>
+    System.config({
+      map: {
+        "deepstream-rx-client": "../dist",
+        "deepstream.io-client-js/dist/deepstream": "../../node_modules/deepstream.io-client-js/dist/deepstream.js"
+      },
+      packages: {
+        "deepstream-rx-client": {
+          main: "deepstream-rx-client.js",
+          defaultExtension: "js"
+        },
+        app: {
+          format: 'register',
+          defaultExtension: 'js'
+        }
+      }
+    });
+
+  </script>
+  <script>
+    System.import('app/main')
+      .then(null, console.error.bind(console));
+  </script>
+</head>
+
+<!-- 3. Display the application -->
+<body>
+<app>Loading...</app>
+</body>
+</html>

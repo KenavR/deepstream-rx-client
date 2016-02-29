@@ -1,6 +1,6 @@
 import {Observable} from "rxjs/Observable";
 import * as deepstream from "deepstream.io-client-js/dist/deepstream";
-import {Record} from "./Record";
+import {Record} from "./record";
 
 
 export class List {

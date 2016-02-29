@@ -1,9 +1,9 @@
 /// <reference path="../typings/mocha/mocha.d.ts" />
 /// <reference path="../typings/chai/chai.d.ts" />
 
-import Record from "../src/record/Record";
-import List from "../src/record/List";
-import DeepStreamRx from "../src/DeepStreamRx";
+import {Record} from "record.ts";
+import {List} from "list.ts";
+import {DeepStreamRx} from "../src/deepstream-rx-client";
 import {expect} from "chai";
 
 describe("deepstream rx client", () => {
