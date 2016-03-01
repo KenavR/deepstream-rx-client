@@ -1,49 +1,43 @@
 import {Observable} from "rxjs/Observable";
 
-export class Record {
-    private _deepstream;
+interface IRecord {
+    name:string;
+    usages:number;
+    isReady:boolean;
+    isDestroyed:boolean;
 
-    constructor(deepstream) {
+    get(path?:string):Observable<any>;
+    set(path:string, value:any):void;
+    //TODO subscribe/unsubscribe?
+    discard():void;
+    delete():void;
+}
+
+export class Record implements IRecord{
+
+    private _deepstream:any;
+
+    name:string;
+    usages:number;
+    isReady:boolean;
+    isDestroyed:boolean;
+
+    constructor(deepstream:any) {
         this._deepstream = deepstream;
     }
 
-    getList(name:string):Observable<any> {
-        let dsList = this._deepstream.record.getList(name);
-        return Observable.fromEvent(dsList, "ready");
+    get(path?:string):Observable<any> {
+        return undefined;
     }
 
-    getListWithEntries(name:string):Observable<any> {
-        return this.getList(name)
-            .flatMap(id => this.getRecord(id))
-            .map(record => record.get());
-
+    set(path:string, value:any):void {
     }
 
-    getRecord(name:string):Observable<any> {
-        return Observable.from(this._deepstream.getRecord(name));
+    discard():void {
     }
 
-    get(path) {
-
+    delete():void {
     }
 
-    set(path, value) {
 
-    }
-
-    subscribe() {
-
-    }
-
-    unsubscribe() {
-
-    }
-
-    discard() {
-
-    }
-
-    delete() {
-
-    }
 }
