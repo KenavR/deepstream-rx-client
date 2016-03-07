@@ -14,7 +14,6 @@ interface IRecord {
 }
 
 export class Record implements IRecord{
-
     private _deepstream:any;
     private _dsRecord:any;
 
