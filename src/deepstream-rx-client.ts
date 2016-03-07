@@ -1,37 +1,52 @@
+/// <reference path="models/ConnectionState.ts" />
+/// <reference path="models/ClientOptions.ts" />
+
 import {Observable} from "rxjs/Observable";
 import * as deepstream from "deepstream.io-client-js/dist/deepstream";
 
-import {Record} from "./record/record";
-import {List} from "./record/list";
+import {ClientRecord} from "./record/ClientRecord";
+import {ClientRPC} from "./rpc/ClientRPC";
 
-export class Client {
-    private _deepstream;
-    public record:Record;
-    public list:List;
+interface IClient {
+    record:ClientRecord;
+    rpc:ClientRPC;
 
-    constructor(path:string, options?:Object) {
-        this._deepstream = deepstream(path, options);
-        this.record = new Record(this._deepstream);
-        this.list = new List(this._deepstream);
+    login(authParams:Object): Observable<any>;
+    close():void;
+    getConnectionState():ConnectionState;
+    getUid():string;
+    getClient():any;
+}
+
+export class Client implements IClient{
+
+    private _deepstream:any;
+    public record:ClientRecord;
+    public rpc:ClientRPC;
+
+    constructor(url:string, options?:IClientOptions) {
+        this._deepstream = deepstream(url, options);
+        this.record = new ClientRecord(this._deepstream);
+        this.rpc = new ClientRPC(this._deepstream);
     }
 
-    login(authParams:Object) {
-        this._deepstream.login(authParams);
+    login(authParams:Object):Observable<any> {
+        return this._deepstream.login(authParams);
     }
 
-    close() {
-
+    close():void {
+        this._deepstream.close();
     }
 
-    getConnectionState() {
-
+    getConnectionState():ConnectionState {
+        return this._deepstream.getConnectionState();
     }
 
     getUid():string {
         return this._deepstream.getUid();
     }
 
-    getClient() {
+    getClient():any {
         return this._deepstream;
     }
 }

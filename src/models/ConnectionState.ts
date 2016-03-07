@@ -1,0 +1,1 @@
+type ConnectionState = "CLOSED" | "AWAITING_AUTHENTICATION" | "OPEN" | "ERROR" | "RECCONECTING";
