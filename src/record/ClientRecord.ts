@@ -3,7 +3,7 @@ import {Record} from "./Record";
 import {Observable} from "rxjs/Observable";
 
 interface IClientRecord {
-    getRecord(name:string):Record;
+    getRecord(name:string):Observable<Record>;
     getList(name:string):Observable<List>;
     getListWithEntries(name:string):Observable<List>;
     getAnonymousRecord():Record; //TODO Implement Anonymous Record
@@ -19,8 +19,9 @@ export class ClientRecord implements IClientRecord {
         this._deepstream = deepstream;
     }
 
-    getRecord(name?:string):Record {
-        return this._deepstream.record.getRecord(name);
+    getRecord(name?:string):Observable<Record> {
+        let dsRecord = this._deepstream.record.getRecord(name);
+        return Observable.fromEvent(dsRecord, "ready").map(r => dsRecord);
     }
 
     getList(name:string):Observable<List> {
