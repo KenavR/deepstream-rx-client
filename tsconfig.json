@@ -12,8 +12,10 @@
     "removeComments": true
   },
   "files": [
-    "src/record/list.ts",
-    "src/record/record.ts",
+    "src/record/AnonymousRecord.ts",
+    "src/record/List.ts",
+    "src/record/Record.ts",
+    "src/rpc/ClientRPC.ts",
     "src/deepstream-rx-client.ts"
   ]
 }

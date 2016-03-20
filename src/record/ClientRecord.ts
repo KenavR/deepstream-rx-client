@@ -14,9 +14,12 @@ interface IClientRecord {
 export class ClientRecord implements IClientRecord {
 
     private _deepstream:any;
+    /* track lists to bypass bug in the ds client lib -> https://github.com/deepstreamIO/deepstream.io-client-js/issues/85*/
+    private _lists:Object;
 
     constructor(deepstream:any) {
         this._deepstream = deepstream;
+        this._lists = {};
     }
 
     getRecord(name?:string):Observable<Record> {
@@ -25,15 +28,20 @@ export class ClientRecord implements IClientRecord {
     }
 
     getList(name:string):Observable<List> {
+        if(this._lists.hasOwnProperty(name)) {
+            return Observable.of(this._lists[name]);
+        }
+
         let dsList = this._deepstream.record.getList(name);
-        return Observable.fromEvent(dsList, "ready")
-                .map(r => dsList);
+        this._lists[name] = dsList;
+        return Observable.fromEvent(this._lists[name], "ready")
+                .map(r => this._lists[name]);
     }
 
     getListWithEntries(name:string):Observable<List> {
         return this.getList(name)
             .map(list => list.getEntries())
-            .flatMap(list => Observable.from(list.map(id => new Record(id)))
+            .flatMap(list => Observable.of(list.map(id => new Record(this._deepstream,  id)))
             .flatMap(list => list.map(record => Observable.fromEvent(record.get(), "ready"))));
     }
 

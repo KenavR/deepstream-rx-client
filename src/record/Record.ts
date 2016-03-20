@@ -22,16 +22,13 @@ export class Record implements IRecord{
     isReady:boolean;
     isDestroyed:boolean;
 
-    constructor(deepstream:any) {
+    constructor(deepstream:any, dsRecord:any) {
         this._deepstream = deepstream;
-    }
-
-    constructor(dsRecord:any) {
         this._dsRecord = dsRecord;
     }
 
     get(path?:string):Observable<any> {
-        return Observable.fromEvent(dsRecord.get(), "ready");
+        return Observable.fromEvent(this._dsRecord.get(), "ready");
     }
 
     set(path:string, value:any):void {
