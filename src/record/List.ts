@@ -1,4 +1,4 @@
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs/Rx";
 import * as deepstream from "deepstream.io-client-js/dist/deepstream";
 import {Record} from "./Record";
 
@@ -8,7 +8,8 @@ interface IList {
     isReady:boolean;
 
     isEmpty():boolean;
-    getEntries():Observable<any>;
+    getEntries(): Observable<any>;
+    on(event:string): Observable<any>;
     setEntries(entries: Array<any>):void;
     addEntry(entry:string, index?:number):void;
     removeEntry(entry:string, index?:number):void;
@@ -17,32 +18,40 @@ interface IList {
     delete():void;
 }
 
-export class List implements IList{
+export class List extends Observable<IList> implements IList{
 
     private _deepstream:any;
-    private _record:Record;
+    private _dsList:any;
 
     name:string;
     usages:number;
     isReady:boolean;
 
-    constructor(deepstream:any) {
+    constructor(deepstream: any, dsList: any) {
+        super();
         this._deepstream = deepstream;
-        this._record = new Record(deepstream);
+        this._dsList = dsList;
     }
 
     isEmpty():boolean {
         return undefined;
     }
 
-    getEntries():Observable<any> {
-        return undefined;
+    getEntries(): Observable<Array<any>> {
+        //let entries = this._dsList.getEntries();
+        let entries = this._dsList.getEntries();
+        return this.map(list => Observable.fromEvent(entries, "ready")).map(r=> entries);
+    }
+    
+    on(event: string) {
+        return Observable.fromEvent(this._dsList, event);
     }
 
     setEntries(entries:Array<any>):void {
     }
 
-    addEntry(entry:string, index?:number):void {
+    addEntry(entry: string, index?: number): void {
+        this._dsList.addEntry(entry, index);
     }
 
     removeEntry(entry:string, index?:number):void {

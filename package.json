@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "autodts": "0.0.6",
+    "deepstream.io": "^0.8.1",
     "deepstream.io-client-js": "^0.4.0",
     "rxjs": "^5.0.0-beta.2"
   }

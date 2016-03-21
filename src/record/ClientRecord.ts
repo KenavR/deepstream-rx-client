@@ -1,6 +1,6 @@
 import {List} from "./List";
 import {Record} from "./Record";
-import {Observable} from "rxjs/Observable";
+import {Observable} from "rxjs/Rx";
 
 interface IClientRecord {
     getRecord(name:string):Observable<Record>;
@@ -33,16 +33,18 @@ export class ClientRecord implements IClientRecord {
         }
 
         let dsList = this._deepstream.record.getList(name);
-        this._lists[name] = dsList;
-        return Observable.fromEvent(this._lists[name], "ready")
-                .map(r => this._lists[name]);
+        this._lists[name] = new List(this._deepstream, dsList);
+        return Observable.fromEvent(dsList, "ready")
+            .map(r => {
+               return this._lists[name];
+            });
     }
 
     getListWithEntries(name:string):Observable<List> {
         return this.getList(name)
-            .map(list => list.getEntries())
-            .flatMap(list => Observable.of(list.map(id => new Record(this._deepstream,  id)))
-            .flatMap(list => list.map(record => Observable.fromEvent(record.get(), "ready"))));
+            .flatMap((list:List) => list.getEntries())
+            .flatMap((list:Array<any>) => Observable.of(list.map(id => new Record(this._deepstream,  id)))
+            .map((list:Array<Record>) => list.map(record => record.get())));
     }
 
     getAnonymousRecord():Record {
