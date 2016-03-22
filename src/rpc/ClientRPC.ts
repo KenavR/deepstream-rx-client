@@ -1,6 +1,6 @@
 import {Observable,Subject} from "rxjs/Rx";
 
-interface IClientRPC {
+export interface IClientRPC {
     provide(name:string):Observable<any>;
     unprovide(name:string):void;
     make(name:string, data:any):Observable<any>;
@@ -25,7 +25,7 @@ export class ClientRPC implements IClientRPC {
     make(name:string, data:any):Observable<any> {
         let subject$ = new Subject();
 
-        let callback = (error, response) => {
+        let callback = (error:any, response:any) => {
             if(error) subject$.error(error);
             subject$.next(response);
             subject$.complete();

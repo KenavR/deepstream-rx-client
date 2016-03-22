@@ -2,7 +2,7 @@ import {Observable} from "rxjs/Rx";
 import * as deepstream from "deepstream.io-client-js/dist/deepstream";
 import {Record} from "./Record";
 
-interface IList {
+export interface IList {
     name:string;
     usages:number;
     isReady:boolean;
@@ -39,6 +39,7 @@ export class List extends Observable<IList> implements IList{
 
     getEntries(): Observable<Array<any>> {
         //let entries = this._dsList.getEntries();
+        console.log("GET ENTRIES OF LIST: ", this._dsList);
         let entries = this._dsList.getEntries();
         return this.map(list => Observable.fromEvent(entries, "ready")).map(r=> entries);
     }

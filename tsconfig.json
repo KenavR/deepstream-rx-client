@@ -16,6 +16,8 @@
     "src/record/List.ts",
     "src/record/Record.ts",
     "src/rpc/ClientRPC.ts",
-    "src/deepstream-rx-client.ts"
+    "src/deepstream-rx-client.ts",
+    "typings/browser/ambient/es6-promise/index.d.ts",
+    "typings/browser/ambient/es6-collections/index.d.ts"
   ]
 }

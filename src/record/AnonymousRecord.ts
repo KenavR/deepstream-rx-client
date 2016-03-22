@@ -1,5 +1,5 @@
-interface IAnonymousRecord {
-    setName(name:string)
+export interface IAnonymousRecord {
+    setName(name: string): void;
 }
 
 export class AnonymousRecord implements IAnonymousRecord{

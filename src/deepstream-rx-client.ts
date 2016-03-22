@@ -8,7 +8,7 @@ import {ClientRecord} from "./record/ClientRecord";
 
 import {ClientRPC} from "./rpc/ClientRPC";
 
-interface IClient {
+export interface IClient {
     record:ClientRecord;
     rpc:ClientRPC;
 

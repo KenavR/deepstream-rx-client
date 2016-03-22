@@ -1,6 +1,6 @@
 import {Observable} from "rxjs/Rx";
 
-interface IRecord {
+export interface IRecord {
     name:string;
     usages:number;
     isReady:boolean;
