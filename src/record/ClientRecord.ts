@@ -28,23 +28,24 @@ export class ClientRecord implements IClientRecord {
     }
 
     getList(name:string):Observable<List> {
+        let obs$: Observable<List>;
+
         if (this._lists.hasOwnProperty(name)) {
-            let obs$: Observable<List> = Observable.of(this._lists[name]);
-            console.log("Object is extensable: ", Object.isExtensible(obs$));
-            (obs$ as any).getEntries = () => { return this._lists[name].getEntries() };
-            return obs$;
+            obs$ = Observable.of(this._lists[name]);
+        } else {
+            let dsList = this._deepstream.record.getList(name);
+            this._lists[name] = new List(this._deepstream, dsList);
+
+            obs$ = Observable.fromEvent(dsList, "ready")
+                .map(r => this._lists[name]);
         }
 
-        let dsList = this._deepstream.record.getList(name);
-        this._lists[name] = new List(this._deepstream, dsList);
-        
-        
-        let obs$ = Observable.fromEvent(dsList, "ready")
-            .map(r => this._lists[name]);
-        console.log("Object is extensable: ", Object.isExtensible(obs$));
-        (obs$ as any).getEntries = () => { return this._lists[name].getEntries() };
+        (obs$ as any).getEntries = () => {
+            return obs$.flatMap(list => {
+                return list.getEntries();
+            });
+        };
         return obs$;
-        
     }
 
     getListWithEntries(name:string):Observable<List> {

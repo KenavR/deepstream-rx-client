@@ -18,7 +18,7 @@ export interface IList {
     delete():void;
 }
 
-export class List extends Observable<IList> implements IList{
+export class List implements IList{
 
     private _deepstream:any;
     private _dsList:any;
@@ -28,7 +28,6 @@ export class List extends Observable<IList> implements IList{
     isReady:boolean;
 
     constructor(deepstream: any, dsList: any) {
-        super();
         this._deepstream = deepstream;
         this._dsList = dsList;
     }
@@ -38,10 +37,7 @@ export class List extends Observable<IList> implements IList{
     }
 
     getEntries(): Observable<Array<any>> {
-        //let entries = this._dsList.getEntries();
-        console.log("GET ENTRIES OF LIST: ", this._dsList);
-        let entries = this._dsList.getEntries();
-        return this.map(list => Observable.fromEvent(entries, "ready")).map(r=> entries);
+        return Observable.of(this._dsList.getEntries());
     }
     
     on(event: string) {

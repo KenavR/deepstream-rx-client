@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha",
     "clean_example": "rm -rf examples\\angular2-example\\dist",
-    "copyDir": " npm run clean_example  && copyfiles dist\\**\\*.* examples\\angular2-example\\dist",
-    "build": "rm -rf dist && tsc || npm run copyDir"
+    "copyDir": " copyfiles dist\\**\\*.* examples\\angular2-example",
+    "build": "tsc || npm run copyDir"
   },
   "author": "",
   "license": "MIT",

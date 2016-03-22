@@ -6,3 +6,4 @@ npm-debug.log
 typings
 dist
 .vscode
+.typingsrc
