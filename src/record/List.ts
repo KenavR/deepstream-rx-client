@@ -33,7 +33,7 @@ export class List implements IList{
     }
 
     isEmpty():boolean {
-        return undefined;
+        return this._dsList.isEmpty();
     }
 
     getEntries(): Observable<Array<any>> {
@@ -45,6 +45,7 @@ export class List implements IList{
     }
 
     setEntries(entries:Array<any>):void {
+        this._dsList.setEntries(entries);
     }
 
     addEntry(entry: string, index?: number): void {
@@ -52,6 +53,7 @@ export class List implements IList{
     }
 
     removeEntry(entry:string, index?:number):void {
+        this._dsList.removeEntry(entry, index);
     }
 
     discard():void {

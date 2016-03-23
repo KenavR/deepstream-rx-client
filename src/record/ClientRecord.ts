@@ -1,12 +1,11 @@
 import {List} from "./List";
 import {Record} from "./Record";
-import {Observable} from "rxjs/Rx";
+import {Observable, Subject } from "rxjs/Rx";
 
 export interface IClientRecord {
     getRecord(name:string):Observable<Record>;
     getList(name:string):Observable<List>;
-    getListWithEntries(name:string):Observable<List>;
-    getAnonymousRecord():Record; //TODO Implement Anonymous Record
+    //getAnonymousRecord():Record; //TODO Implement Anonymous Record
     listen(pattern:string):Observable<any>;
     unlisten(pattern:string):void;
 }
@@ -22,7 +21,7 @@ export class ClientRecord implements IClientRecord {
         this._lists = {};
     }
 
-    getRecord(name?:string):Observable<Record> {
+    getRecord(name:string):Observable<Record> {
         let dsRecord = this._deepstream.record.getRecord(name);
         return Observable.fromEvent(dsRecord, "ready").map(r => dsRecord);
     }
@@ -48,22 +47,22 @@ export class ClientRecord implements IClientRecord {
         return obs$;
     }
 
-    getListWithEntries(name:string):Observable<List> {
-        return this.getList(name)
-            .flatMap((list:List) => list.getEntries())
-            .flatMap((list:Array<any>) => Observable.of(list.map(id => new Record(this._deepstream,  id)))
-            .map((list:Array<Record>) => list.map(record => record.get())));
-    }
-
-    getAnonymousRecord():Record {
-        return undefined;
-    }
-
     listen(pattern:string):Observable<any> {
-        return undefined;
+        let subject$ = new Subject();
+
+        let callback = (error:any, response:any) => {
+            if(error) subject$.error(error);
+            subject$.next(response);
+            subject$.complete();
+        };
+
+        this._deepstream.record.listen(pattern, callback);
+
+        return subject$;
     }
 
     unlisten(pattern:string):void {
+        this._deepstream.record.unlisten(pattern);
     }
 
 }

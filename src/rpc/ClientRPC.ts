@@ -1,7 +1,7 @@
 import {Observable,Subject} from "rxjs/Rx";
 
 export interface IClientRPC {
-    provide(name:string):Observable<any>;
+    provide(name:string, func:Function):void;
     unprovide(name:string):void;
     make(name:string, data:any):Observable<any>;
 }
@@ -14,12 +14,12 @@ export class ClientRPC implements IClientRPC {
         this._deepstream = deepstream;
     }
 
-    provide(name:string):Observable<any> {
-        return this._deepstream.provide(name);
+    provide(name:string, func:Function):void {
+        this._deepstream.provide(name, func);
     }
 
     unprovide(name:string):void {
-
+        this._deepstream.unporivde(name);
     }
 
     make(name:string, data:any):Observable<any> {

@@ -1,16 +1,16 @@
-/// <reference path="../typings/mocha/mocha.d.ts" />
-/// <reference path="../typings/chai/chai.d.ts" />
+/// <reference path="../typings/main/ambient/mocha/index.d.ts" />
+/// <reference path="../typings/main/ambient/chai/index.d.ts" />
 
-import DeepStreamRx from "../src/DeepStreamRx";
-import {Observable} from "rxjs/Observable";
+import {Client} from "../dist/deepstream-rx-client";
+import {Observable} from "rxjs/Rx";
 import {expect} from "chai";
 
 describe("Deepstream List", () => {
 
-    let client;
+    let client:Client;
 
-    before("initialize DeepStreamRx client", () => {
-        client = new DeepStreamRx("localhost:8080");
+    before("initialize DeepstreamRxClient", () => {
+        client = new Client("localhost:6020");
         client.login();
     });
 

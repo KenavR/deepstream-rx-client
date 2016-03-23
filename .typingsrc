@@ -1,4 +1,0 @@
-{
-    "proxy": "http://proxy:81",
-    "rejectUnauthorized": false
-} 

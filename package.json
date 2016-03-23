@@ -4,26 +4,31 @@
   "description": "RxJS wrapper for deepstream.io client",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "npm run pretest && mocha",
     "clean_example": "rm -rf examples\\angular2-example\\dist",
     "copyDir": " copyfiles dist\\**\\*.* examples\\angular2-example",
-    "build": "tsc || npm run copyDir"
+    "build": "tsc || npm run copyDir",
+    "pretest": "tsc test/*Spec.ts --module commonjs"
   },
   "author": "",
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "autodts": "0.0.6",
     "copy-dir": "0.0.8",
+    "deepstream.io": "^0.8.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-mocha": "^0.2.2",
+    "karma-requirejs": "^0.2.6",
     "mocha": "^2.4.5",
     "tsd": "^0.6.5",
     "typescript": "^1.8.2",
-    "typings": "^0.6.8"
+    "typings": "^0.6.10"
   },
   "dependencies": {
-    "autodts": "0.0.6",
-    "deepstream.io": "^0.8.1",
     "deepstream.io-client-js": "^0.4.0",
-    "rxjs": "^5.0.0-beta.2",
-    "typings": "^0.6.10"
+    "rxjs": "^5.0.0-beta.2"
   }
 }

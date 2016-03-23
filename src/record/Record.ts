@@ -32,6 +32,7 @@ export class Record implements IRecord{
     }
 
     set(path:string, value:any):void {
+        this._dsRecord.set(path, value);
     }
 
     discard():void {

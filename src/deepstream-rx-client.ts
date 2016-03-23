@@ -11,6 +11,7 @@ import {ClientRPC} from "./rpc/ClientRPC";
 export interface IClient {
     record:ClientRecord;
     rpc:ClientRPC;
+    event:ClientEvent;
 
     login(authParams:Object): Observable<any>;
     close():void;
@@ -24,11 +25,13 @@ export class Client implements IClient{
     private _deepstream:any;
     public record:ClientRecord;
     public rpc:ClientRPC;
+    public event:ClientEvent;
 
     constructor(url:string, options?:IClientOptions) {
         this._deepstream = deepstream(url, options);
         this.record = new ClientRecord(this._deepstream);
         this.rpc = new ClientRPC(this._deepstream);
+        this.event = new ClientEvent(this._deepstream);
     }
 
     login(authParams:Object):Observable<any> {
