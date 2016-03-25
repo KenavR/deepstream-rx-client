@@ -3,16 +3,15 @@
 
 import {Client} from "../dist/deepstream-rx-client";
 import {expect} from "chai";
+import {ClientRecord} from "../dist/record/ClientRecord";
 
 describe("deepstream rx client", () => {
-    var _client;
+    var _client:any;
 
     it("should return a client object", () => {
         _client = new Client("localhost:6020");
         expect(_client.record).to.be.not.null;
-        expect(_client.record).to.be.instanceOf(Record);
-        expect(_client.list).to.be.not.null;
-        expect(_client.list).to.be.instanceOf(List);
+        expect(_client.record).to.be.instanceOf(ClientRecord);
     });
 
     /*it("should work with path after port", () => {

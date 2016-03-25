@@ -4,8 +4,11 @@
 import {Observable} from "rxjs/Observable";
 import * as deepstream from "deepstream.io-client-js/dist/deepstream";
 
-import {ClientRecord} from "./record/ClientRecord";
+import {IClientOptions} from "./models/ClientOptions";
+import {ConnectionState} from "./models/ConnectionState";
 
+import {ClientRecord} from "./record/ClientRecord";
+import {ClientEvent} from "./event/ClientEvent";
 import {ClientRPC} from "./rpc/ClientRPC";
 
 export interface IClient {
@@ -13,7 +16,7 @@ export interface IClient {
     rpc:ClientRPC;
     event:ClientEvent;
 
-    login(authParams:Object): Observable<any>;
+    login(authParams?:Object): Observable<any>;
     close():void;
     getConnectionState():ConnectionState;
     getUid():string;
@@ -34,7 +37,7 @@ export class Client implements IClient{
         this.event = new ClientEvent(this._deepstream);
     }
 
-    login(authParams:Object):Observable<any> {
+    login(authParams?:Object):Observable<any> {
         return this._deepstream.login(authParams);
     }
 

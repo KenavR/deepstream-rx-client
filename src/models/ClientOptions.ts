@@ -1,4 +1,4 @@
-interface IClientOptions {
+export interface IClientOptions {
     reconnectIntervalIncrement?:number;
     maxReconnectAttempts?:number;
     rpcAckTimeout?:number;

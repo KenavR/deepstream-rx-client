@@ -1,1 +1,1 @@
-type ConnectionState = "CLOSED" | "AWAITING_AUTHENTICATION" | "OPEN" | "ERROR" | "RECCONECTING";
+export type ConnectionState = "CLOSED" | "AWAITING_AUTHENTICATION" | "OPEN" | "ERROR" | "RECCONECTING";

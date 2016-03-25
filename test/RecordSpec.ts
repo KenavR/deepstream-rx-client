@@ -29,28 +29,4 @@ describe("Deepstream List", () => {
         });
     });
 
-    describe("getListWithEntries", () => {
-        let list$;
-        before("initialize observable", () => {
-           list$ = client.record.getListWithEntries("test");
-        });
-
-        it("should return an Observable", () => {
-            expect(list$).to.be.not.null;
-            expect(list$).to.be.instanceOf(Observable);
-        });
-
-        it("should return an array of entities", (done) => {
-            console.log("data:: ");
-            list$.subscribe(
-                data => {
-                    console.log("data:: ", data);
-                    expect(data).to.be.not.null.and.to.be.a("Array");
-                    expect(data).to.be.not.empty;
-                    expect(data[0]).to.have.property("message");
-                    done();
-                }
-            )
-        });
-    });
 });

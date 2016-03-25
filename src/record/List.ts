@@ -1,5 +1,4 @@
 import {Observable} from "rxjs/Rx";
-import * as deepstream from "deepstream.io-client-js/dist/deepstream";
 import {Record} from "./Record";
 
 export interface IList {

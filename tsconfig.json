@@ -18,6 +18,7 @@
     "src/rpc/ClientRPC.ts",
     "src/deepstream-rx-client.ts",
     "typings/browser/ambient/es6-promise/index.d.ts",
-    "typings/browser/ambient/es6-collections/index.d.ts"
+    "typings/browser/ambient/es6-collections/index.d.ts",
+    "examples/angular2-example/dist/dist/models/ClientOptions.d.ts"
   ]
 }
